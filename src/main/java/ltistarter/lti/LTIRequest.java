@@ -248,13 +248,11 @@ public class LTIRequest {
         boolean includesSourcedid = (ltiSourcedid != null);
 
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT k, c, l, m, u"); //k.keyId, k.keyKey, k.secret, c.contextId, c.title AS contextTitle, l.linkId, l.title AS linkTitle, u.userId, u.displayName AS userDisplayName, u.email AS userEmail, u.subscribe, u.userSha256, m.membershipId, m.role, m.roleOverride"); // 15
+        sb.append("SELECT k, c, l, m, u, r"); //k.keyId, k.keyKey, k.secret, c.contextId, c.title AS contextTitle, l.linkId, l.title AS linkTitle, u.userId, u.displayName AS userDisplayName, u.email AS userEmail, u.subscribe, u.userSha256, m.membershipId, m.role, m.roleOverride"); // 18
+        //, r.resultId, r.sourcedid, r.grade"); // 3
 
         if (includesService) {
             sb.append(", s"); //, s.serviceId, s.serviceKey AS service"); // 2
-        }
-        if (includesSourcedid) {
-            sb.append(", r"); //, r.resultId, r.sourcedid, r.grade"); // 3
         }
         /*
         if (includeProfile) {
@@ -265,14 +263,12 @@ public class LTIRequest {
                 "LEFT JOIN k.contexts c ON c.contextSha256 = :context " + // LtiContextEntity
                 "LEFT JOIN c.links l ON l.linkSha256 = :link " + // LtiLinkEntity
                 "LEFT JOIN c.memberships m " + // LtiMembershipEntity
-                "LEFT JOIN m.user u ON u.userSha256 = :user " // LtiUserEntity
+                "LEFT JOIN m.user u ON u.userSha256 = :user " + // LtiUserEntity
+                "LEFT JOIN u.results r " // LtiResultEntity
         );
 
         if (includesService) {
             sb.append(" LEFT JOIN k.services s ON s.serviceSha256 = :service"); // LtiServiceEntity
-        }
-        if (includesSourcedid) {
-            sb.append(" LEFT JOIN u.results r ON r.sourcedidSha256 = :sourcedid"); // LtiResultEntity
         }
         /*
         if (includeProfile) {
@@ -296,9 +292,6 @@ System.out.println("sql="+sql);
         if (includesService) {
             q.setParameter("service", BaseEntity.makeSHA256(ltiServiceId));
         }
-        if (includesSourcedid) {
-            q.setParameter("sourcedid", BaseEntity.makeSHA256(ltiSourcedid));
-        }
         @SuppressWarnings("unchecked")
         List<Object[]> rows = q.getResultList();
         if (rows == null || rows.isEmpty()) {
@@ -311,13 +304,9 @@ System.out.println("sql="+sql);
             if (row.length > 2) link = (LtiLinkEntity) row[2];
             if (row.length > 3) membership = (LtiMembershipEntity) row[3];
             if (row.length > 4) user = (LtiUserEntity) row[4];
-            if (includesService && includesSourcedid) {
-                if (row.length > 5) service = (LtiServiceEntity) row[5];
-                if (row.length > 6) result = (LtiResultEntity) row[6];
-            } else if (includesService) {
-                if (row.length > 5) service = (LtiServiceEntity) row[5];
-            } else if (includesSourcedid) {
-                if (row.length > 5) result = (LtiResultEntity) row[5];
+            if (row.length > 5) result = (LtiResultEntity) row[6];
+            if (includesService) {
+                if (row.length > 6) service = (LtiServiceEntity) row[5];
             }
 
             // handle SPECIAL post lookup processing

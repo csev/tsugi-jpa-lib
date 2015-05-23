@@ -31,9 +31,6 @@ public class LtiResultEntity extends BaseEntity {
     @Column(name = "sourcedid", nullable = false, insertable = true, updatable = true, length = 4096)
     private String sourcedid;
     @Basic
-    @Column(name = "sourcedid_sha256", nullable = false, insertable = true, updatable = true, length = 64)
-    private String sourcedidSha256;
-    @Basic
     @Column(name = "grade", nullable = true, insertable = true, updatable = true, precision = 0)
     private Float grade;
     @Basic
@@ -79,7 +76,6 @@ public class LtiResultEntity extends BaseEntity {
             retrievedAt = new Date();
         }
         this.sourcedid = sourcedid;
-        this.sourcedidSha256 = makeSHA256(sourcedid);
         this.retrievedAt = new Timestamp(retrievedAt.getTime());
         this.user = user;
         this.link = link;
@@ -100,14 +96,6 @@ public class LtiResultEntity extends BaseEntity {
 
     public void setSourcedid(String sourcedid) {
         this.sourcedid = sourcedid;
-    }
-
-    public String getSourcedidSha256() {
-        return sourcedidSha256;
-    }
-
-    public void setSourcedidSha256(String sourcedidSha256) {
-        this.sourcedidSha256 = sourcedidSha256;
     }
 
     public Float getGrade() {
@@ -183,8 +171,6 @@ public class LtiResultEntity extends BaseEntity {
 
         if (resultId != that.resultId) return false;
         if (sourcedid != null ? !sourcedid.equals(that.sourcedid) : that.sourcedid != null) return false;
-        if (sourcedidSha256 != null ? !sourcedidSha256.equals(that.sourcedidSha256) : that.sourcedidSha256 != null)
-            return false;
 
         return true;
     }
@@ -193,7 +179,6 @@ public class LtiResultEntity extends BaseEntity {
     public int hashCode() {
         int result = (int) resultId;
         result = 31 * result + (sourcedid != null ? sourcedid.hashCode() : 0);
-        result = 31 * result + (sourcedidSha256 != null ? sourcedidSha256.hashCode() : 0);
         return result;
     }
 
