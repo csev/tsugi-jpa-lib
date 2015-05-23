@@ -14,13 +14,6 @@
  */
 package ltistarter;
 
-import ltistarter.lti.LTIConsumerDetailsService;
-import ltistarter.lti.LTIOAuthAuthenticationHandler;
-import ltistarter.lti.LTIOAuthProviderProcessingFilter;
-import ltistarter.oauth.MyConsumerDetailsService;
-import ltistarter.oauth.MyOAuthAuthenticationHandler;
-import ltistarter.oauth.MyOAuthNonceServices;
-import ltistarter.oauth.ZeroLeggedOAuthProviderProcessingFilter;
 import ltistarter.repository.AllRepositories;
 import org.h2.server.web.WebServlet;
 import org.slf4j.Logger;
@@ -45,9 +38,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
-import org.springframework.security.oauth.provider.OAuthProcessingFilterEntryPoint;
-import org.springframework.security.oauth.provider.token.InMemoryProviderTokenServices;
-import org.springframework.security.oauth.provider.token.OAuthProviderTokenServices;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.StringValueResolver;
@@ -120,60 +110,17 @@ public class Application extends WebMvcConfigurerAdapter {
     @Configuration
     @Order(1) // HIGHEST
     public static class LTISecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
-        private LTIOAuthProviderProcessingFilter ltioAuthProviderProcessingFilter;
         @Autowired
         AllRepositories allRepositories;
-        @Autowired
-        LTIConsumerDetailsService oauthConsumerDetailsService;
-        @Autowired
-        MyOAuthNonceServices oauthNonceServices;
-        @Autowired
-        LTIOAuthAuthenticationHandler oauthAuthenticationHandler;
-        @Autowired
-        OAuthProcessingFilterEntryPoint oauthProcessingFilterEntryPoint;
-        @Autowired
-        OAuthProviderTokenServices oauthProviderTokenServices;
 
         @PostConstruct
         public void init() {
-            ltioAuthProviderProcessingFilter = new LTIOAuthProviderProcessingFilter(allRepositories, oauthConsumerDetailsService, oauthNonceServices, oauthProcessingFilterEntryPoint, oauthAuthenticationHandler, oauthProviderTokenServices);
+            log.info("init()");
         }
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.antMatcher("/lti1p/**")
-                    .addFilterBefore(ltioAuthProviderProcessingFilter, UsernamePasswordAuthenticationFilter.class)
-                    .authorizeRequests().anyRequest().hasRole("LTI");
-        }
-    }
-
-    @Configuration
-    @Order(11) // HIGH
-    public static class OAuthSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
-        private ZeroLeggedOAuthProviderProcessingFilter zeroLeggedOAuthProviderProcessingFilter;
-        @Autowired
-        MyConsumerDetailsService oauthConsumerDetailsService;
-        @Autowired
-        MyOAuthNonceServices oauthNonceServices;
-        @Autowired
-        MyOAuthAuthenticationHandler oauthAuthenticationHandler;
-        @Autowired
-        OAuthProcessingFilterEntryPoint oauthProcessingFilterEntryPoint;
-        @Autowired
-        OAuthProviderTokenServices oauthProviderTokenServices;
-
-        @PostConstruct
-        public void init() {
-            // NOTE: have to build the filter here: http://stackoverflow.com/questions/24761194/how-do-i-stop-spring-filterregistrationbean-from-registering-my-filter-on/24762970
-            zeroLeggedOAuthProviderProcessingFilter = new ZeroLeggedOAuthProviderProcessingFilter(oauthConsumerDetailsService, oauthNonceServices, oauthProcessingFilterEntryPoint, oauthAuthenticationHandler, oauthProviderTokenServices);
-        }
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http.antMatcher("/oauth/**")
-                    // added filters must be ordered: see http://docs.spring.io/spring-security/site/docs/3.2.0.RELEASE/apidocs/org/springframework/security/config/annotation/web/HttpSecurityBuilder.html#addFilter%28javax.servlet.Filter%29
-                    .addFilterBefore(zeroLeggedOAuthProviderProcessingFilter, UsernamePasswordAuthenticationFilter.class)
-                    .authorizeRequests().anyRequest().hasRole("OAUTH");
+            log.info("configure()");
         }
     }
 
@@ -211,14 +158,6 @@ public class Application extends WebMvcConfigurerAdapter {
             // this ensures security context info (Principal, sec:authorize, etc.) is accessible on all paths
             http.antMatcher("/**").authorizeRequests().anyRequest().permitAll();
         }
-    }
-
-    // OAuth beans
-
-    @Bean(name = "oauthProviderTokenServices")
-    public OAuthProviderTokenServices oauthProviderTokenServices() {
-        // NOTE: we don't use the OAuthProviderTokenServices for 0-legged but it cannot be null
-        return new InMemoryProviderTokenServices();
     }
 
 }

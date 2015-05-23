@@ -14,6 +14,7 @@
  */
 package ltistarter.controllers;
 
+import ltistarter.lti.LTIRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,19 +23,27 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 /**
- * This controller should be protected by OAuth 1.0a (on the /oauth path)
+ * This Tsugi controller should be protected by OAuth 1.0a (on the /oauth path)
  * Key "key" and secret "secret"
  */
 @Controller
-@RequestMapping("/oauth")
-public class OAuthController extends BaseController {
+@RequestMapping("/tsugi")
+public class TsugiController extends BaseController {
 
     @RequestMapping({"", "/"})
     public String home(HttpServletRequest req, Principal principal, Model model) {
+System.out.println("YO");
         commonModelPopulate(req, principal, model);
-        model.addAttribute("name", "oauth");
-        req.getSession().setAttribute("login", "basic");
-        return "home"; // name of the template
+        model.addAttribute("name", "lti1p");
+        req.getSession().setAttribute("login", "oauth");
+        LTIRequest ltiRequest = (LTIRequest) req.getAttribute(LTIRequest.class.getName());
+        if (ltiRequest != null) {
+            model.addAttribute("lti", true);
+            model.addAttribute("ltiContext", ltiRequest.getLtiContextId());
+            model.addAttribute("ltiUser", ltiRequest.getLtiUserDisplayName());
+            model.addAttribute("ltiLink", ltiRequest.getLtiLinkId());
+        }
+        return "tsugi"; // name of the template
     }
 
 }

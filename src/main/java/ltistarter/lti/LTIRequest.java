@@ -28,6 +28,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
+import org.imsglobal.basiclti.BasicLTIConstants;
+import org.imsglobal.basiclti.BasicLTIUtil;
+import org.imsglobal.json.IMSJSONRequest;
+import org.imsglobal.lti2.objects.Service_offered;
+import org.imsglobal.lti2.objects.StandardServices;
+import org.imsglobal.lti2.objects.ToolConsumer;
+
 /**
  * LTI Request object holds all the details for a valid LTI request
  * (including data populated on the validated launch)

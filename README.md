@@ -1,5 +1,8 @@
-LTI 1/2 java starter app
-========================
+Tsugi for Java
+==============
+
+This is a fork of azeckoski/lti\_starter as I intend to refactor this and align
+the library patterns with Tsugi's APIs.
 
 IMS LTI 1 and 2 based starter (sample) application written using Java and Spring Boot
 

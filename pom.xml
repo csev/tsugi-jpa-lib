@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.zeckoski</groupId>
-  <artifactId>ltistarter</artifactId>
+  <groupId>org.tsugi</groupId>
+  <artifactId>tsugi-j-all</artifactId>
   <version>0.1-SNAPSHOT</version>
   <inceptionYear>2014</inceptionYear>
   <packaging>war</packaging>
@@ -146,6 +146,12 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+       <groupId>org.sakaiproject.basiclti</groupId>
+       <artifactId>basiclti-util</artifactId>
+       <version>11-SNAPSHOT</version>
+    </dependency>
+
   </dependencies>
 
   <profiles>
@@ -209,6 +215,7 @@
             <exclude>**/*.txt</exclude>
             <exclude>**/*.md</exclude>
             <exclude>**/*.sql</exclude>
+            <exclude>**/*.swp</exclude>
             <exclude>**/js/jquery/**</exclude>
           </excludes>
           <mapping>
@@ -228,6 +235,16 @@
   </build>
 
   <developers>
+    <developer>
+      <id>csev</id>
+      <name>Charles Severance</name>
+      <email>drchuck@gmail.org</email>
+      <url>http://www.dr-chuck.com/</url>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>-5</timezone>
+    </developer>
     <developer>
       <id>azeckoski</id>
       <name>Aaron Zeckoski</name>
