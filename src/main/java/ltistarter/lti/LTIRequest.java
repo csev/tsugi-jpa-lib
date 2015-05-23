@@ -581,6 +581,54 @@ public class LTIRequest {
         return roleNum;
     }
 
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.loaded ? "Loaded, " : "Not Loaded, ");
+        sb.append(this.complete ? "Complete, " : "Not Complete, ");
+        sb.append(this.updated ? "Updated\n" : "Not Updated\n");
+        sb.append("ltiContextId=");
+        sb.append(this.ltiContextId);
+        sb.append("\nltiContextTitle=");
+        sb.append(this.ltiContextTitle);
+
+        sb.append("\nltiLinkTitle=");
+        sb.append(this.ltiLinkId);
+        sb.append("\nltiLinkTitle=");
+        sb.append(this.ltiLinkTitle);
+
+        sb.append("\nltiUserId=");
+        sb.append(this.ltiUserId);
+        sb.append("\nltiUserEmail=");
+        sb.append(this.ltiUserEmail);
+        sb.append("\nltiUserDisplayName=");
+        sb.append(ltiUserDisplayName);
+        sb.append("\nrawUserRoles=");
+        sb.append(this.rawUserRoles);
+/*
+    String ltiConsumerKey;
+    String ltiLinkDescription;
+    Locale ltiPresLocale;
+    String ltiPresTarget;
+    int ltiPresWidth;
+    int ltiPresHeight;
+    String ltiPresReturnUrl;
+    String ltiMessageType;
+    String ltiServiceId;
+    String ltiSourcedid;
+    String ltiToolConsumerCode;
+    String ltiToolConsumerVersion;
+    String ltiToolConsumerName;
+    String ltiToolConsumerEmail;
+    String ltiUserImageUrl;
+    Set<String> ltiUserRoles;
+    int userRoleNumber;
+    String rawUserRolesOverride;
+    String ltiVersion;
+*/
+        return sb.toString();
+
+    }
+
     // GETTERS
 
     public HttpServletRequest getHttpServletRequest() {

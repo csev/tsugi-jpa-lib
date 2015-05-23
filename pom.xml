@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.tsugi</groupId>
-  <artifactId>tsugi-j-all</artifactId>
+  <artifactId>tsugi-j-lib</artifactId>
   <version>0.1-SNAPSHOT</version>
   <inceptionYear>2014</inceptionYear>
   <packaging>jar</packaging>
