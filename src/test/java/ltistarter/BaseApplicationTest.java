@@ -14,7 +14,6 @@
  */
 package ltistarter;
 
-import ltistarter.config.ApplicationConfig;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -34,22 +33,15 @@ public abstract class BaseApplicationTest {
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiredMembersInspection")
-    public ApplicationConfig applicationConfig;
-
-    @Autowired
-    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     public ConfigurableWebApplicationContext context;
 
     @PostConstruct
     public void init() {
-        applicationConfig.getEnvironment().setActiveProfiles("testing");
     }
 
     @Test
     public void checkSpring() {
         assertNotNull(context);
-        assertNotNull(applicationConfig);
-        assertTrue(applicationConfig.getEnvironment().acceptsProfiles("testing"));
     }
 
 }

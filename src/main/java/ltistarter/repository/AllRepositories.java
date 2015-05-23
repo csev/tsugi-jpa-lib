@@ -31,9 +31,6 @@ import javax.persistence.PersistenceContext;
 public class AllRepositories {
 
     @Autowired
-    public ConfigRepository configs;
-
-    @Autowired
     public LtiContextRepository contexts;
 
     @Autowired

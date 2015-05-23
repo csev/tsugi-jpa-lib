@@ -14,8 +14,6 @@
  */
 package ltistarter;
 
-import ltistarter.model.ConfigEntity;
-import ltistarter.repository.ConfigRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +24,5 @@ import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ApplicationTests extends BaseApplicationTest {
-
-    @Autowired
-    @SuppressWarnings({"SpringJavaAutowiredMembersInspection", "SpringJavaAutowiringInspection"})
-    ConfigRepository configRepository;
-
-    @Test
-    @Transactional
-    public void testConfig() {
-        assertNotNull(applicationConfig);
-        assertNotNull(configRepository);
-        configRepository.save(new ConfigEntity("test.thing", "Value"));
-    }
 
 }

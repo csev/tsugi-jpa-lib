@@ -14,7 +14,6 @@
  */
 package ltistarter.database;
 
-import ltistarter.config.ApplicationConfig;
 import ltistarter.model.LtiKeyEntity;
 import ltistarter.model.LtiUserEntity;
 import ltistarter.model.ProfileEntity;
@@ -39,9 +38,6 @@ import javax.annotation.PostConstruct;
 public class DatabasePreload {
 
     final static Logger log = LoggerFactory.getLogger(DatabasePreload.class);
-
-    @Autowired
-    ApplicationConfig applicationConfig;
 
     @Autowired
     @SuppressWarnings({"SpringJavaAutowiredMembersInspection", "SpringJavaAutowiringInspection"})
