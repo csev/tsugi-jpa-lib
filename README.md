@@ -1,47 +1,28 @@
-Tsugi for Java
-==============
+Tsugi for Java - Library Code
+=============================
 
-This is a fork of azeckoski/lti\_starter as I intend to refactor this and align
-the library patterns with Tsugi's APIs.
+This is a java version of the PHP Tsugi application (https://github.com/csev/tsugi).  This repository if the API library and a sample application that uses this library is https://github.com/csev/tsugi-j-sample
 
-IMS LTI 1 and 2 based starter (sample) application written using Java and Spring Boot
-
-The goal is to have a Java based web app which can serve as the basis (or starting point) for building a fully compliant LTI 1 or 2 based tool without having to manage the complexities of LTI 2 or come up with a strategy for handling the various types of data storage.
-
-Parts based on the data structures and code in tsugi (https://github.com/csev/tsugi) which is a Multi-tenant learning tool hosting platform (http://www.tsugi.org)
+This is a fork of azeckoski/lti\_starter 
 
 Build
 -----
-This will produce a starter.war file in the *target* directory which can be placed into any standard servlet container.
+This will produces a jar file and drops it into your maven repository. 
 
     mvn install
 
 Database
 --------
 
-This is expecting that PHP Tsugi already is running and its database is on localhost:8889
+This is expecting that PHP Tsugi already is installed running and its database is on localhost:8889
 using the default account, password, and database name and that the tables already exist.
 If you want to change this, edit the file
 
     src/main/resources/application.properties
 
-Quick Run
----------
-You can run the app in place to try it out without having to install and deploy a servlet container.
+History
+-------
 
-    mvn clean install spring-boot:run
+This is a fork of azeckoski/lti\_starter which was originally based on my PHP Tsugi code.
 
-Then go to the following default URL:
 
-    http://localhost:8080/
-
-Customizing
------------
-Use the application.properties to control various aspects of the Spring Boot application (like setup your own database connection).
-Use the logback.xml to adjust and control logging.
-
-Debugging
----------
-To enable the debugging port (localhost:8000) when using spring-boot:run, use the main profile: -Pdebug. Then you can attach any remote debugger (eclipse, intellij, etc.) to localhost:8000. NOTE that the application will pause until you connect the debugger to it.
-
-    mvn clean install spring-boot:run -Pdebug
