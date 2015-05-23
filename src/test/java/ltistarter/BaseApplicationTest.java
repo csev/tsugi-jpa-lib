@@ -26,7 +26,7 @@ import javax.annotation.PostConstruct;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-@SpringApplicationConfiguration(classes = Application.class)
+// @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @ActiveProfiles("testing") // make the active profile "testing"
 public abstract class BaseApplicationTest {
