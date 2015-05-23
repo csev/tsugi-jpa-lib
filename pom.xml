@@ -12,21 +12,8 @@
   <name>LTI starter app</name>
   <description>IMS LTI starter app</description>
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.1.4.RELEASE</version>
-    <relativePath/>
-    <!-- lookup parent from repository -->
-  </parent>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <start-class>ltistarter.Application</start-class>
-    <java.version>1.7</java.version>
-  </properties>
-
   <dependencies>
+
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
@@ -50,108 +37,51 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- MySQL DATABASE -->
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.35</version>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.5</version>
     </dependency>
 
-    <!-- OAuth 1.0 library
-    <dependency>
-      <groupId>net.oauth.core</groupId>
-      <artifactId>oauth-provider</artifactId>
-      <version>20100527</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>net.oauth.core</groupId>
-          <artifactId>oauth-httpclient3</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>net.oauth.core</groupId>
-          <artifactId>oauth-httpclient4</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.httpcomponents</groupId>
-          <artifactId>httpclient</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-      <version>4.3.3</version>
-    </dependency>
-    -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>3.2.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>3.2.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>3.2.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>3.2.1.RELEASE</version>
+        </dependency>
 
-    <!-- Added by spring boot template below -->
-    <!-- tag::jetty[] -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-tomcat</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-jetty</artifactId>
-    </dependency>
-    <!-- end::jetty[] -->
-    <!-- tag::actuator[] -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
-    <!-- end::actuator[] -->
+<dependency>
+  <groupId>javax.persistence</groupId>
+  <artifactId>persistence-api</artifactId>  
+  <version>1.0</version>
+</dependency>
 
-    <!-- templating -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-thymeleaf</artifactId>
-    </dependency>
-    <!-- adds template integration with spring security - allows sec: attributed to work (automatic SpringSecurityDialect) -->
-    <dependency>
-      <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-springsecurity3</artifactId>
-    </dependency>
+<dependency>
+    <groupId>org.springframework.data</groupId>
+    <artifactId>spring-data-jpa</artifactId>
+    <version>1.7.2.RELEASE</version>
+</dependency>
 
-    <!-- security and oauth -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-security</artifactId>
-    </dependency>
-    <!-- OAuth -->
-    <dependency>
-      <groupId>org.springframework.security.oauth</groupId>
-      <artifactId>spring-security-oauth</artifactId>
-      <version>2.0.2.RELEASE</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.security.oauth</groupId>
-      <artifactId>spring-security-oauth2</artifactId>
-      <version>2.0.2.RELEASE</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-rest</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>2.4</version>
+        <scope>provided</scope>
+      </dependency>
 
     <dependency>
        <groupId>org.sakaiproject.basiclti</groupId>
@@ -159,43 +89,64 @@
        <version>11-SNAPSHOT</version>
     </dependency>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.5</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
+
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-test</artifactId>
+	<version>2.5</version>
+        <scope>test</scope>
+</dependency>
+
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-test</artifactId>
+    <version>1.1.4.RELEASE</version>
+
+        <scope>compile</scope>
+</dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <scope>test</scope>
+    <version>1.1.4.RELEASE</version>
+
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-rest</artifactId>
+            <scope>test</scope>
+    <version>1.1.4.RELEASE</version>
+
+    </dependency>
+
+
   </dependencies>
 
-  <profiles>
-    <profile>
-      <id>debug</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-            <configuration>
-              <jvmArguments><!-- debug on port 8000 -->
-                -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000
-              </jvmArguments>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-
   <build>
-    <finalName>starter</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.3.2</version>
         <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
+          <source>1.7</source>
+          <target>1.7</target>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
     </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
   </build>
 
   <developers>

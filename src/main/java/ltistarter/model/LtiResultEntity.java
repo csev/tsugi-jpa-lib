@@ -56,7 +56,8 @@ public class LtiResultEntity extends BaseEntity {
     @JoinColumn(name = "user_id")
     private LtiUserEntity user;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.DETACH)
+    // @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "service_id")
     private LtiServiceEntity service;
 
