@@ -16,6 +16,15 @@ This will produce a starter.war file in the *target* directory which can be plac
 
     mvn install
 
+Database
+--------
+
+This is expecting that PHP Tsugi already is running and its database is on localhost:8889
+using the default account, password, and database name and that the tables already exist.
+If you want to change this, edit the file
+
+    src/main/resources/application.properties
+
 Quick Run
 ---------
 You can run the app in place to try it out without having to install and deploy a servlet container.
@@ -25,10 +34,6 @@ You can run the app in place to try it out without having to install and deploy 
 Then go to the following default URL:
 
     http://localhost:8080/
-
-You can access the H2 console for default in-memory DB (JDBC URL: **jdbc:h2:mem:AZ**) at:
-
-    http://localhost:8080/console
 
 Customizing
 -----------

@@ -15,7 +15,6 @@
 package ltistarter;
 
 import ltistarter.repository.AllRepositories;
-import org.h2.server.web.WebServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,19 +84,7 @@ public class Application extends WebMvcConfigurerAdapter {
         return new ConcurrentMapCacheManager(); // not appropriate for production, try JCacheCacheManager or HazelcastCacheManager instead
     }
 
-    /**
-     * Allows access to the H2 console at: {server}/console/
-     * Enter this as the JDBC URL: jdbc:h2:mem:AZ
-     */
-    @Bean
-    public ServletRegistrationBean h2servletRegistration() {
-        ServletRegistrationBean registration = new ServletRegistrationBean(new WebServlet());
-        registration.addUrlMappings("/console/*");
-        return registration;
-    }
-
     // Spring Security
-
     @Autowired
     @Order(Ordered.HIGHEST_PRECEDENCE + 10)
     @SuppressWarnings("SpringJavaAutowiringInspection")
