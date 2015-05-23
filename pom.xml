@@ -7,7 +7,7 @@
   <artifactId>tsugi-j-all</artifactId>
   <version>0.1-SNAPSHOT</version>
   <inceptionYear>2014</inceptionYear>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
 
   <name>LTI starter app</name>
   <description>IMS LTI starter app</description>
