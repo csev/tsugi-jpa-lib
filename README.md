@@ -1,7 +1,7 @@
 Tsugi for Java - Library Code
 =============================
 
-This is a Java version of the PHP Tsugi application (https://github.com/csev/tsugi).  This repository if the API library and a sample application that uses this library is https://github.com/csev/tsugi-j-sample
+This is a Java version of the PHP Tsugi application (https://github.com/csev/tsugi).  This repository is the API library and a sample application that uses this library is https://github.com/csev/tsugi-j-sample
 
 This is a fork of azeckoski/lti\_starter 
 
