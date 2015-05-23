@@ -300,6 +300,7 @@ System.out.println("sql="+sql);
             // k, c, l, m, u, s, r
             Object[] row = rows.get(0);
             if (row.length > 0) key = (LtiKeyEntity) row[0];
+System.out.println("Secret = "+key.getSecret());
             if (row.length > 1) context = (LtiContextEntity) row[1];
             if (row.length > 2) link = (LtiLinkEntity) row[2];
             if (row.length > 3) membership = (LtiMembershipEntity) row[3];
