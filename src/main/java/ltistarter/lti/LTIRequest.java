@@ -126,6 +126,8 @@ public class LTIRequest {
     String rawUserRolesOverride;
     String ltiVersion;
 
+    String sqlQuery;
+
     /**
      * @param request an http servlet request
      * @throws IllegalStateException if this is not an LTI request
@@ -283,6 +285,8 @@ public class LTIRequest {
         }*/
 
         String sql = sb.toString();
+System.out.println("sql="+sql);
+        this.sqlQuery = sql;
         Query q = repos.entityManager.createQuery(sql);
         q.setMaxResults(1);
         q.setParameter("key", BaseEntity.makeSHA256(ltiConsumerKey));
@@ -583,10 +587,18 @@ public class LTIRequest {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
+
+        sb.append("ltiConsumerKey=");
+        sb.append(this.ltiConsumerKey);
+        sb.append("\n");
+
         sb.append(this.loaded ? "Loaded, " : "Not Loaded, ");
         sb.append(this.complete ? "Complete, " : "Not Complete, ");
-        sb.append(this.updated ? "Updated\n" : "Not Updated\n");
-        sb.append("ltiContextId=");
+        sb.append(this.updated ? "Updated" : "Not Updated");
+        sb.append("\nsqlQuery=");
+        sb.append(this.sqlQuery);
+
+        sb.append("\nltiContextId=");
         sb.append(this.ltiContextId);
         sb.append("\nltiContextTitle=");
         sb.append(this.ltiContextTitle);
