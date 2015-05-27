@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tsugi.zippy;
+package org.tsugi.lti;
 
 import org.tsugi.jpa.model.*;
 import org.tsugi.jpa.repository.AllRepositories;
