@@ -12,13 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tsugi.lti;
+package org.tsugi.zippy;
 
 import org.tsugi.lti.model.*;
 import org.tsugi.lti.repository.AllRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ComponentScan;
-
 
 /**
  * LTI Request object holds all the details for a valid LTI request
@@ -27,9 +27,28 @@ import org.springframework.context.annotation.ComponentScan;
  * This basically does everything in lti_db.php from tsugi (except the OAuth stuff, that is handled by spring security)
  *
  */
+@Configuration
 @ComponentScan("org.tsugi.lti")
 public class Tsugi {
 
+    @Autowired
+    AllRepositories allRepositories;
+
     public String bob = "bob";
+
+    public Tsugi () {
+System.out.println("+=+=++++++++++++++++++++++++++++ Constructor");
+System.out.println("allRepositories="+allRepositories);
+    }
+
+    public void init() {
+System.out.println("+=+=++++++++++++++++++++++++++++ Tsugi init");
+System.out.println("allRepositories="+allRepositories);
+    }
+
+    public void check() {
+System.out.println("+=+=++++++++++++++++++++++++++++ Tsugi check");
+System.out.println("allRepositories="+allRepositories);
+    }
 
 }
