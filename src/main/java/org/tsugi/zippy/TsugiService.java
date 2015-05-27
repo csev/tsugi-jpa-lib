@@ -29,26 +29,22 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @Configuration
 @ComponentScan("org.tsugi.lti")
-public class Tsugi {
+public class TsugiService {
 
     @Autowired
     AllRepositories allRepositories;
 
     public String bob = "bob";
 
-    public Tsugi () {
-System.out.println("+=+=++++++++++++++++++++++++++++ Constructor");
-System.out.println("allRepositories="+allRepositories);
-    }
-
     public void init() {
 System.out.println("+=+=++++++++++++++++++++++++++++ Tsugi init");
 System.out.println("allRepositories="+allRepositories);
     }
 
-    public void check() {
+    public String check() {
 System.out.println("+=+=++++++++++++++++++++++++++++ Tsugi check");
 System.out.println("allRepositories="+allRepositories);
+        return "Sweet";
     }
 
 }
