@@ -305,9 +305,9 @@ System.out.println("Secret = "+key.getSecret());
             if (row.length > 2) link = (LtiLinkEntity) row[2];
             if (row.length > 3) membership = (LtiMembershipEntity) row[3];
             if (row.length > 4) user = (LtiUserEntity) row[4];
-            if (row.length > 5) result = (LtiResultEntity) row[6];
+            if (row.length > 5) result = (LtiResultEntity) row[5];
             if (includesService) {
-                if (row.length > 6) service = (LtiServiceEntity) row[5];
+                if (row.length > 6) service = (LtiServiceEntity) row[6];
             }
 
             // handle SPECIAL post lookup processing
