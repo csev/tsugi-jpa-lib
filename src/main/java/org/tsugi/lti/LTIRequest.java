@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tsugi.lti.lti;
+package org.tsugi.lti;
 
 import org.tsugi.lti.model.*;
 import org.tsugi.lti.repository.AllRepositories;

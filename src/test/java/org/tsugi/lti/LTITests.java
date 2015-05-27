@@ -14,7 +14,7 @@
  */
 package org.tsugi.lti;
 
-import org.tsugi.lti.lti.LTIRequest;
+import org.tsugi.lti.LTIRequest;
 import org.tsugi.lti.model.*;
 import org.tsugi.lti.repository.*;
 import org.junit.Test;
