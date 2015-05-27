@@ -12,14 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tsugi.lti.repository;
+package org.tsugi.jpa.repository;
 
-import org.tsugi.lti.model.SSOKeyEntity;
+import org.tsugi.jpa.model.LtiMembershipEntity;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public interface SSOKeyRepository extends PagingAndSortingRepository<SSOKeyEntity, Long> {
+public interface LtiMembershipRepository extends PagingAndSortingRepository<LtiMembershipEntity, Long> {
     /* Add custom crud methods here
      * If you need a custom implementation of the methods then see docs for steps to add it
      * http://docs.spring.io/spring-data/data-commons/docs/current/reference/html/repositories.html
@@ -30,16 +30,4 @@ public interface SSOKeyRepository extends PagingAndSortingRepository<SSOKeyEntit
      * @Query("SELECT u FROM User u WHERE u.alias = ?1")
      * List<User> findWithAlias(String alias);
      */
-
-    /**
-     * @param key the unique key
-     * @return the SSOKeyEntity OR null if there is no entity matching this key
-     */
-    SSOKeyEntity findByKeyKey(String key);
-
-    /**
-     * @param key the unique key
-     * @return the number of keys removed (0 or 1)
-     */
-    int deleteByKeyKey(String key);
 }

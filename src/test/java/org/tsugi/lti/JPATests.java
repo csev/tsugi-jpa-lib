@@ -12,10 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tsugi.lti;
+package org.tsugi.jpa;
 
-import org.tsugi.lti.model.*;
-import org.tsugi.lti.repository.*;
+import org.tsugi.jpa.model.*;
+import org.tsugi.jpa.repository.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;

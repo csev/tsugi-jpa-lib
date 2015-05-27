@@ -14,8 +14,8 @@
  */
 package org.tsugi.zippy;
 
-import org.tsugi.lti.model.*;
-import org.tsugi.lti.repository.AllRepositories;
+import org.tsugi.jpa.model.*;
+import org.tsugi.jpa.repository.AllRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ComponentScan;
@@ -28,7 +28,7 @@ import org.springframework.context.annotation.ComponentScan;
  *
  */
 @Configuration
-@ComponentScan("org.tsugi.lti")
+@ComponentScan("org.tsugi.jpa")
 public class TsugiService {
 
     @Autowired

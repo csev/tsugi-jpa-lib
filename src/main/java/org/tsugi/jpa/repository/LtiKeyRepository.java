@@ -12,14 +12,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tsugi.lti.repository;
+package org.tsugi.jpa.repository;
 
-import org.tsugi.lti.model.LtiLinkEntity;
+import org.tsugi.jpa.model.LtiKeyEntity;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * NOTE: use of this interface magic makes all subclass-based (CGLIB) proxies fail
+ */
 @Transactional
-public interface LtiLinkRepository extends PagingAndSortingRepository<LtiLinkEntity, Long> {
+public interface LtiKeyRepository extends PagingAndSortingRepository<LtiKeyEntity, Long> {
     /* Add custom crud methods here
      * If you need a custom implementation of the methods then see docs for steps to add it
      * http://docs.spring.io/spring-data/data-commons/docs/current/reference/html/repositories.html
@@ -30,4 +33,16 @@ public interface LtiLinkRepository extends PagingAndSortingRepository<LtiLinkEnt
      * @Query("SELECT u FROM User u WHERE u.alias = ?1")
      * List<User> findWithAlias(String alias);
      */
+
+    /**
+     * @param key the unique key
+     * @return the LtiKeyEntity OR null if there is no entity matching this key
+     */
+    LtiKeyEntity findByKeyKey(String key);
+
+    /**
+     * @param key the unique key
+     * @return the number of keys removed (0 or 1)
+     */
+    int deleteByKeyKey(String key);
 }

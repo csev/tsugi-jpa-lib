@@ -12,32 +12,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tsugi.lti.model;
+package org.tsugi.jpa.model;
+
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "profile")
-public class ProfileEntity extends BaseEntity {
+@Table(name = "lti_user")
+public class LtiUserEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "profile_id", nullable = false, insertable = true, updatable = true)
-    private long profileId;
+    @Column(name = "user_id", nullable = false, insertable = true, updatable = true)
+    private long userId;
     @Basic
-    @Column(name = "profile_sha256", nullable = false, insertable = true, updatable = true, length = 64)
-    private String profileSha256;
+    @Column(name = "user_sha256", nullable = false, insertable = true, updatable = true, length = 64)
+    private String userSha256;
     @Basic
-    @Column(name = "profile_key", nullable = false, insertable = true, updatable = true, length = 4096)
-    private String profileKey;
+    @Column(name = "user_key", nullable = false, insertable = true, updatable = true, length = 4096)
+    private String userKey;
     @Basic
-    @Column(name = "displayName", nullable = true, insertable = true, updatable = true, length = 2048)
+    @Column(name = "displayname", nullable = true, insertable = true, updatable = true, length = 4096)
     private String displayName;
+    /**
+     * Actual max for emails is 254 chars
+     */
     @Basic
-    @Column(name = "email", nullable = true, insertable = true, updatable = true, length = 2048)
+    @Column(name = "email", nullable = true, insertable = true, updatable = true, length = 255)
     private String email;
     @Basic
     @Column(name = "locale", nullable = true, insertable = true, updatable = true, length = 63)
@@ -52,47 +56,51 @@ public class ProfileEntity extends BaseEntity {
     @Column(name = "login_at", nullable = false, insertable = true, updatable = true)
     private Timestamp loginAt;
 
-    @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
-    private Set<SSOKeyEntity> ssoKeys = new HashSet<>();
-    @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
-    private Set<LtiUserEntity> users = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "profile_id", nullable = true)
+    private ProfileEntity profile;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<LtiResultEntity> results;
 
-    public ProfileEntity() {
+    protected LtiUserEntity() {
     }
 
-    public ProfileEntity(String profileKey, Date loginAt, String email) {
-        assert profileKey != null;
+    /**
+     * @param userKey user identifier
+     * @param loginAt date of user login
+     */
+    public LtiUserEntity(String userKey, Date loginAt) {
+        assert StringUtils.isNotBlank(userKey);
         if (loginAt == null) {
             loginAt = new Date();
         }
-        this.profileKey = profileKey;
-        this.profileSha256 = makeSHA256(profileKey);
+        this.userKey = userKey;
+        this.userSha256 = makeSHA256(userKey);
         this.loginAt = new Timestamp(loginAt.getTime());
-        this.email = email;
     }
 
-    public long getProfileId() {
-        return profileId;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setProfileId(long profileId) {
-        this.profileId = profileId;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
-    public String getProfileSha256() {
-        return profileSha256;
+    public String getUserSha256() {
+        return userSha256;
     }
 
-    public void setProfileSha256(String profileSha256) {
-        this.profileSha256 = profileSha256;
+    public void setUserSha256(String userSha256) {
+        this.userSha256 = userSha256;
     }
 
-    public String getProfileKey() {
-        return profileKey;
+    public String getUserKey() {
+        return userKey;
     }
 
-    public void setProfileKey(String profileKey) {
-        this.profileKey = profileKey;
+    public void setUserKey(String userKey) {
+        this.userKey = userKey;
     }
 
     public String getDisplayName() {
@@ -143,20 +151,20 @@ public class ProfileEntity extends BaseEntity {
         this.loginAt = loginAt;
     }
 
-    public Set<SSOKeyEntity> getSsoKeys() {
-        return ssoKeys;
+    public ProfileEntity getProfile() {
+        return profile;
     }
 
-    public void setSsoKeys(Set<SSOKeyEntity> ssoKeys) {
-        this.ssoKeys = ssoKeys;
+    public void setProfile(ProfileEntity profile) {
+        this.profile = profile;
     }
 
-    public Set<LtiUserEntity> getUsers() {
-        return users;
+    public Set<LtiResultEntity> getResults() {
+        return results;
     }
 
-    public void setUsers(Set<LtiUserEntity> users) {
-        this.users = users;
+    public void setResults(Set<LtiResultEntity> results) {
+        this.results = results;
     }
 
     @Override
@@ -164,21 +172,22 @@ public class ProfileEntity extends BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ProfileEntity that = (ProfileEntity) o;
+        LtiUserEntity that = (LtiUserEntity) o;
 
-        if (profileId != that.profileId) return false;
-        if (profileKey != null ? !profileKey.equals(that.profileKey) : that.profileKey != null) return false;
-        if (profileSha256 != null ? !profileSha256.equals(that.profileSha256) : that.profileSha256 != null)
-            return false;
+        if (userId != that.userId) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (userKey != null ? !userKey.equals(that.userKey) : that.userKey != null) return false;
+        if (userSha256 != null ? !userSha256.equals(that.userSha256) : that.userSha256 != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) profileId;
-        result = 31 * result + (profileSha256 != null ? profileSha256.hashCode() : 0);
-        result = 31 * result + (profileKey != null ? profileKey.hashCode() : 0);
+        int result = (int) userId;
+        result = 31 * result + (userSha256 != null ? userSha256.hashCode() : 0);
+        result = 31 * result + (userKey != null ? userKey.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
 

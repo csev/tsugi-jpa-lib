@@ -12,9 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tsugi.lti.repository;
+package org.tsugi.jpa.repository;
 
-import org.tsugi.lti.model.LtiServiceEntity;
+import org.tsugi.jpa.model.LtiServiceEntity;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 

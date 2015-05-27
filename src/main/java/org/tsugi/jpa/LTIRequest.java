@@ -12,10 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.tsugi.lti;
+package org.tsugi.jpa;
 
-import org.tsugi.lti.model.*;
-import org.tsugi.lti.repository.AllRepositories;
+import org.tsugi.jpa.model.*;
+import org.tsugi.jpa.repository.AllRepositories;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
