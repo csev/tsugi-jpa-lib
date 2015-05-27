@@ -20,6 +20,19 @@ If you want to change this, edit the file
 
     src/main/resources/application.properties
 
+Git Details
+-----------
+
+If you forked my repo and want to grab the latest changes, do 
+the following once:
+
+    git remote add upstream https://github.com/csev/tsugi-j-sample
+
+Then from time to time when you want to pull mods and update your fork:
+
+    git pull upstream master
+    git push origin master
+    
 History
 -------
 
