@@ -1,5 +1,5 @@
-Tsugi for Java - Library Code
-=============================
+Tsugi for Java Persistence Architecture - Library Code
+======================================================
 
 This is a Java version of the PHP Tsugi application (https://github.com/csev/tsugi).  This repository is the API library and a sample application that uses this library is https://github.com/csev/tsugi-j-sample
 
